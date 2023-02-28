@@ -8,21 +8,20 @@ import PropTypes from 'prop-types';
 
 export class Searchbar extends Component {
     state = {
-        searchbar: '',
+        searchbar: ''
     }
 
     changeSearch = evt =>
         this.setState({ searchbar: evt.currentTarget.value });
 
-
-    onSearchClick = event => {
+    handleSubmitForm = event => {
         event.preventDefault();
         if (this.state.searchbar.trim() === '') {
             return Notiflix.Notify.failure('Please write search options')
         }
-        this.props.onSearch(this.state.searchbar)
-        this.setState({ searchbar: '' })
-    }
+        this.props.onSearch(this.state.searchbar);
+        this.setState({ searchbar: '' });
+    };
 
 
     render() {
@@ -33,7 +32,7 @@ export class Searchbar extends Component {
 
                 <header className={(css.Searchbar)}>
                     <form className={(css.SearchForm)}>
-                        <button type="submit" onClick={this.onSearchClick} className={(css.SearchFormButton)}  >
+                        <button type="submit" onClick={this.handleSubmitForm} className={(css.SearchFormButton)}  >
                             <FiSearch className={(css.searchIcon)} />
                             <span className={(css.SearchFormButtonLabel)} >Search</span>
                         </button>
@@ -52,7 +51,30 @@ export class Searchbar extends Component {
 }
 
 
-
 Searchbar.propTypes = {
     searchbar: PropTypes.string
 };
+
+
+
+    // onSearchClick = event => {
+    //     event.preventDefault();
+    //     if (this.state.searchbar.trim() === '') {
+    //         return Notiflix.Notify.failure('Please write search options')
+    //     }
+    //     this.props.onSearch(this.state.searchbar)
+    //     this.setState({ searchbar: '' })
+    // }
+
+    // onSubmitForm = event => {
+    //     if (event !== this.state.searchbar) {
+    //         this.setState({
+    //             searchbar: event,
+    //             images: [],
+    //             visibleBtn: false,
+    //             currentPage: 1,
+    //         });
+    //     } else {
+    //         Notiflix.Notify.failure('The new search must be different from the current search');
+    //     }
+    // };
